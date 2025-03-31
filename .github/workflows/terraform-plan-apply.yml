@@ -1,10 +1,10 @@
 name: Terraform CI/CD Azure
 
 on:
-  pull_request:
-    branches:
-      - main
-  push:
+  workflow_run:
+    workflows: ["Terraform Test"]
+    types:
+      - completed
     branches:
       - main
 
@@ -16,6 +16,7 @@ env:
 
 jobs:
   terraform-plan:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: Terraform Plan
     runs-on: ubuntu-latest
 
@@ -47,7 +48,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: terraform-plan
-          path: terraform.plan
+          path: .
 
 
   terraform-apply:
