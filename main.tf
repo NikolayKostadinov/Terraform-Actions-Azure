@@ -90,4 +90,5 @@ resource "azurerm_app_service_source_control" "sc" {
   timeouts {
     create = "60m"
   }
+  use_manual_integration = true
 }
