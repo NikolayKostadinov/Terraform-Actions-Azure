@@ -29,7 +29,7 @@ jobs:
       - name: Login Azure via Azure CLI
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZURE_CREDENTIALS }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       # Install the latest version of the Terraform CLI
       - name: Setup Terraform
