@@ -29,7 +29,7 @@ resource "azurerm_resource_group" "arg" {
 
 #Create The Linux App Service Plan
 resource "azurerm_service_plan" "asp" {
-  name                ="${var.app_service_plan_name}${random_integer.ri.result}"
+  name                = "${var.app_service_plan_name}${random_integer.ri.result}"
   resource_group_name = azurerm_resource_group.arg.name
   location            = azurerm_resource_group.arg.location
   os_type             = "Linux"
