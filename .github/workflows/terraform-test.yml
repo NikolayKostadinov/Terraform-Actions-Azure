@@ -15,14 +15,12 @@ jobs:
 
     steps:
       # Checkout the repository to the GitHub Actions Runner
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       # Install the latest version of the Terraform CLI
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: "1.8.*"
 
       # Initialize a new or exist terraform working directory
       - name: Terraform Init
