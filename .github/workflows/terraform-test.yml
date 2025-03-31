@@ -26,7 +26,7 @@ jobs:
 
       # Initialize a new or exist terraform working directory
       - name: Terraform Init
-        run: terraform init -backend=false
+        run: terraform init
 
       # Check that all configuration files are adhere to the canonical format
       - name: Terraform Format Check
