@@ -1,7 +1,7 @@
 name: Terraform CI/CD Azure
 
 on:
-  workflow_run: ["Terraform Test"]
+  workflow_run: ["Terraform Test"] 
   types:
     - completed
   branches:
