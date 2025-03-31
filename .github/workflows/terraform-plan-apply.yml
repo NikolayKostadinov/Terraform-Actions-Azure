@@ -1,12 +1,12 @@
 name: Terraform CI/CD Azure
 
 on:
-  workflow_run: ["Terraform Test"] 
-  types:
-    - completed
-  branches:
-    - main
-
+  workflow_run:
+    workflows: ["Terraform Test"]
+    types:
+      - completed
+    branches:
+      - main
 
 env:
   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
