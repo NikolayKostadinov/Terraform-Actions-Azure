@@ -57,7 +57,7 @@ resource "azurerm_linux_web_app" "alwa" {
 }
 
 resource "azurerm_mssql_server" "sqlserver" {
-  name                         = var.sql_server_name
+  name                         = "${var.sql_server_name}${random_integer.ri.result}"
   resource_group_name          = azurerm_resource_group.arg.name
   location                     = azurerm_resource_group.arg.location
   version                      = "12.0"
