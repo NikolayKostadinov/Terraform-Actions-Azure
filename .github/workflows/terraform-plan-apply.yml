@@ -1,19 +1,23 @@
 name: 'Terraform Plan and Apply'
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
+  workflow_run:
+    workflows: ["Terraform Test"]
+    types:
+      - completed
+    branches:
+      - main
 
 env:
-  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID}}
-  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET}}
-  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID}}
-  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID}}
+  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
 
 jobs:
   terraform-plan:
-    name: 'Terraform Plan Job'
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    name: Terraform Plan
     runs-on: ubuntu-latest
 
     steps:

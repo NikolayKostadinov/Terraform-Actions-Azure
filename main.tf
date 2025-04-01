@@ -7,6 +7,13 @@ terraform {
       version = "4.24.0"
     }
   }
+
+  backend "azurerm" {
+    resource_group_name = "StorageRG"
+    storage_account_name = "taskboardstorage"
+    container_name = "taskboardcontainer"
+    key = "terraform.tfstate"
+  }
 }
 
 # Configure the Microsoft Azure Provider
@@ -57,7 +64,7 @@ resource "azurerm_linux_web_app" "alwa" {
 }
 
 resource "azurerm_mssql_server" "sqlserver" {
-  name                         = "${var.sql_server_name}${random_integer.ri.result}"
+  name                         = var.sql_server_name
   resource_group_name          = azurerm_resource_group.arg.name
   location                     = azurerm_resource_group.arg.location
   version                      = "12.0"
@@ -66,7 +73,7 @@ resource "azurerm_mssql_server" "sqlserver" {
 }
 
 resource "azurerm_mssql_database" "database" {
-  name           = "${var.sql_database_name}${random_integer.ri.result}"
+  name           = var.sql_database_name
   server_id      = azurerm_mssql_server.sqlserver.id
   collation      = "SQL_Latin1_General_CP1_CI_AS"
   license_type   = "LicenseIncluded"
